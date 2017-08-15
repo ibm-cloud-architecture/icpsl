@@ -38,13 +38,20 @@ fi
 # Create Virtual Systems in SL
 echo "Creating Virtual Systems in SL. Required arguments are hostnameprefix, domainname, datacenter, operatingsystem, softlayer sshkey"
 echo "Running ./createslsys.sh $HOSTNAME $DOMAIN $DATACENTER $OS $SLSSHKEY" 
-./createslsys.sh $HOSTNAME $DOMAIN $DATACENTER $OS $SLSSHKEY
+
+# Eduardo start
+#./createslsys.sh $HOSTNAME $DOMAIN $DATACENTER $OS $SLSSHKEY
+# Eduardo end
+
 if [ $? -ne 0 ]; then
    echo "Error creating systems in Softlayer..."
    exit 1
 fi
 #Wait for the machines to comeup
-sleep 300
+# Eduardo start
+# sleep 300
+# Eduardo end
+
 
 # Create hosts file for all nodes
 echo "127.0.0.1 localhost.localdomain localhost" > /tmp/hosts
