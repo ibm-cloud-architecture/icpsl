@@ -100,8 +100,11 @@ echo "[proxy]" >> /tmp/icphosts
 echo $PROXYIP >> /tmp/icphosts
 
 # Copy the images to master controller
-scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/$SLSSHKEY.rsa ibm-cloud-private-installer-1.2.0.tar.gz root@$MASTERIP:/tmp
-scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/$SLSSHKEY.rsa ibm-cloud-private-x86_64-1.2.0.tar.gz root@$MASTERIP:/tmp
+# Eduardo begin
+# scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/$SLSSHKEY.rsa ibm-cloud-private-installer-1.2.0.tar.gz root@$MASTERIP:/tmp
+# scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/$SLSSHKEY.rsa ibm-cloud-private-x86_64-1.2.0.tar.gz root@$MASTERIP:/tmp
+# Eduardo end
+
 #Expand the images
 ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/$SLSSHKEY.rsa root@$MASTERIP "cd /tmp; tar zxf ibm-cloud-private-installer-1.2.0.tar.gz; mv ibm-cloud-private-1.2.0 /opt/;cd /opt/ibm-cloud-private-1.2.0; mv /tmp/ibm-cloud-private-x86_64-1.2.0.tar.gz images/"
 
