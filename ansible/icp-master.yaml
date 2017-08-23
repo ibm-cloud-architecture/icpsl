@@ -1,0 +1,11 @@
+---
+- hosts: kube-master
+  remote_user: root
+  environment:
+    KUBECONFIG: /etc/kubernetes/admin.conf
+  tasks:
+  - include: kubelet.yaml
+
+  - debug: msg="Master IP is {{ master_ip }}"
+
+
