@@ -285,12 +285,12 @@ function deploy_testapp {
 echo Using the following SoftLayer configuration
 slcli config show
 
-create_masters
+create_master
 create_nodes
 
 update_hosts_file
 
-configure_master
+configure_masters
 configure_nodes
 
 configure_kubectl
