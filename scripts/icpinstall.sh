@@ -15,8 +15,8 @@ if [ ! -e addslsshkey.sh ] && [ ! -e createslsys.sh ] && [ ! -e prereqs.sh ] && 
   exit 1
 fi
 
-logfile=/tmp/createmaster.log
-exec > $logfile 2>&1
+#logfile=/tmp/createmaster.log
+#exec > $logfile 2>&1
 
 SLUSER=$1
 SLAPIKEY=$2
@@ -39,7 +39,7 @@ fi
 echo "Creating Virtual Systems in SL. Required arguments are hostnameprefix, domainname, datacenter, operatingsystem, softlayer sshkey"
 echo "Running ./createslsys.sh $HOSTNAME $DOMAIN $DATACENTER $OS $SLSSHKEY" 
 
-# Eduardo start
+# Eduardo start - Remove this line to bypass the VM creation
 #./createslsys.sh $HOSTNAME $DOMAIN $DATACENTER $OS $SLSSHKEY
 # Eduardo end
 
@@ -101,9 +101,11 @@ echo $PROXYIP >> /tmp/icphosts
 
 # Copy the images to master controller
 # Eduardo begin
-# scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/$SLSSHKEY.rsa ibm-cloud-private-installer-1.2.0.tar.gz root@$MASTERIP:/tmp
-# scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/$SLSSHKEY.rsa ibm-cloud-private-x86_64-1.2.0.tar.gz root@$MASTERIP:/tmp
+scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/$SLSSHKEY.rsa ibm-cloud-private-installer-1.2.0.tar.gz root@$MASTERIP:/tmp
+scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/$SLSSHKEY.rsa ibm-cloud-private-x86_64-1.2.0.tar.gz root@$MASTERIP:/tmp
 # Eduardo end
+
+exit 1
 
 #Expand the images
 ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/$SLSSHKEY.rsa root@$MASTERIP "cd /tmp; tar zxf ibm-cloud-private-installer-1.2.0.tar.gz; mv ibm-cloud-private-1.2.0 /opt/;cd /opt/ibm-cloud-private-1.2.0; mv /tmp/ibm-cloud-private-x86_64-1.2.0.tar.gz images/"
