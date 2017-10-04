@@ -290,8 +290,8 @@ create_nodes
 
 update_hosts_file
 
-configure_masters
 configure_nodes
+configure_masters
 
 configure_kubectl
 
